@@ -31,7 +31,6 @@
 package org.codemonkey4fun.util;
 
 import lombok.extern.slf4j.Slf4j;
-
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -44,6 +43,9 @@ import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
+/**
+ * Copy from <a>https://github.com/CleverTap/apns-http2/blob/master/src/main/java/com/clevertap/apns/internal/JWT.java</a>
+ */
 @Slf4j
 public final class JwtUtil {
 
