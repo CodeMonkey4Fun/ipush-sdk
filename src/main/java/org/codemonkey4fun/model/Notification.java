@@ -1,11 +1,9 @@
-package org.codemonkey4fun.service.internal;
-
-import org.codemonkey4fun.model.DeliveryPriority;
+package org.codemonkey4fun.model;
 
 /**
  * APNs notification common APIs
  */
-public interface NotificationService {
+public interface Notification {
 
     Long getMsgId();
 

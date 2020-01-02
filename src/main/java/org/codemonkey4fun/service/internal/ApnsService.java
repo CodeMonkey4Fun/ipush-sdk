@@ -1,5 +1,6 @@
 package org.codemonkey4fun.service.internal;
 
+import org.codemonkey4fun.model.Notification;
 import org.codemonkey4fun.model.SendResult;
 
 /**
@@ -12,12 +13,12 @@ public interface ApnsService {
      * @param notification
      * @return
      */
-    SendResult push(NotificationService notification);
+    SendResult push(Notification notification);
 
     /**
      * send notification parallel way
      * @param notification
      * @param callBack
      */
-    void push(NotificationService notification, PushCallBack callBack);
+    void push(Notification notification, PushCallBack callBack);
 }

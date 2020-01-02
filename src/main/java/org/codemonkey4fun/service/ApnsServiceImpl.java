@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
 import org.codemonkey4fun.model.SendResult;
-import org.codemonkey4fun.service.internal.NotificationService;
+import org.codemonkey4fun.model.Notification;
 import org.codemonkey4fun.service.internal.PushCallBack;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,7 +51,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
                             .dispatcher(dispatcher)
                             .addInterceptor(null)
                             .build();
-
+        // TODO interceptor calling
         this.address = address;
     }
 
@@ -61,7 +61,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
      * @return
      */
     @Override
-    public SendResult push(NotificationService notification) {
+    public SendResult push(Notification notification) {
         SendResult result = new SendResult();
         Request request = composeRequest(notification);
 
@@ -89,7 +89,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
      * @param callBack
      */
     @Override
-    public void push(NotificationService notification, PushCallBack callBack) {
+    public void push(Notification notification, PushCallBack callBack) {
         SendResult result = new SendResult();
         Request request = composeRequest(notification);
 
@@ -124,7 +124,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
      * @param notificationService
      * @return
      */
-    private Request composeRequest(NotificationService notificationService) {
+    private Request composeRequest(Notification notificationService) {
         Request.Builder builder = new Request.Builder()
                 .url("https://" + address.getHostName() + "/3/device/" + notificationService.getDeviceToken())
                 .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JSON.toJSONString(notificationService)));
