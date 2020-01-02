@@ -24,9 +24,10 @@ package org.codemonkey4fun.model;
 
 /**
  * The priority of the notification
+ *
  * @see <a href=
- *      "https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html">
- *      Local and Remote Notification Programming Guide - Communicating with APNs</a>
+ * "https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html">
+ * Local and Remote Notification Programming Guide - Communicating with APNs</a>
  */
 public enum DeliveryPriority {
     /**
@@ -47,10 +48,6 @@ public enum DeliveryPriority {
         this.code = code;
     }
 
-    public int code() {
-        return this.code;
-    }
-
     public static DeliveryPriority convert(final int code) {
         for (final DeliveryPriority priority : DeliveryPriority.values()) {
             if (priority.code() == code) {
@@ -59,5 +56,9 @@ public enum DeliveryPriority {
         }
 
         throw new IllegalArgumentException(String.format("No delivery priority found with code %d", code));
+    }
+
+    public int code() {
+        return this.code;
     }
 }

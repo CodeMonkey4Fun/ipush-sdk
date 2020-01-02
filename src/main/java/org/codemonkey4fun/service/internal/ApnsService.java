@@ -10,6 +10,7 @@ public interface ApnsService {
 
     /**
      * send notification sequential way
+     *
      * @param notification
      * @return
      */
@@ -17,6 +18,7 @@ public interface ApnsService {
 
     /**
      * send notification parallel way
+     *
      * @param notification
      * @param callBack
      */

@@ -23,10 +23,9 @@ public class AuthenticationInstance {
     private String token;
 
     /**
-     *
-     * @param keyId A 10-character key identifier (kid) key, obtained from your developer account
+     * @param keyId  A 10-character key identifier (kid) key, obtained from your developer account
      * @param teamId The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account
-     * @param token The issued at (iat) registered claim key, whose value indicates the time at which the token was generated, in terms of the number of seconds since Epoch, in UTC
+     * @param token  The issued at (iat) registered claim key, whose value indicates the time at which the token was generated, in terms of the number of seconds since Epoch, in UTC
      * @return
      */
     public static AuthenticationInstance getInstance(String keyId, String teamId, String token) {

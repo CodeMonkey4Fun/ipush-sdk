@@ -31,13 +31,9 @@
 package org.codemonkey4fun.util;
 
 import lombok.extern.slf4j.Slf4j;
+
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.Signature;
-import java.security.SignatureException;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -52,10 +48,10 @@ public final class JwtUtil {
     /**
      * Generates a JWT token as per Apple's specifications.
      *
-     * @param kid  The key ID (found when generating your private key)
-     * @param tid The team ID (found in the member center)
+     * @param kid    The key ID (found when generating your private key)
+     * @param tid    The team ID (found in the member center)
      * @param secret The private key (excluding the header and the footer)
-     * @param now indicates the time at which the token was generated, in terms of the number of seconds since Epoch, in UTC
+     * @param now    indicates the time at which the token was generated, in terms of the number of seconds since Epoch, in UTC
      * @return The resulting token, which will be valid for one hour
      * @throws InvalidKeySpecException  if the key is incorrect
      * @throws NoSuchAlgorithmException if the key algo failed to load
@@ -63,7 +59,7 @@ public final class JwtUtil {
      * @throws SignatureException       if this signature object is not initialized properly.
      */
     public static String getToken(final String kid, final String tid, final String secret, final long now)
-            throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, SignatureException{
+            throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, SignatureException {
         final String header = "{\"alg\":\"ES256\",\"kid\":\"" + kid + "\"}";
         final String payload = "{\"iss\":\"" + tid + "\",\"iat\":" + now + "}";
 

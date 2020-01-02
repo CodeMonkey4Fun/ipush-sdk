@@ -1,15 +1,16 @@
 package org.codemonkey4fun;
 
+import org.codemonkey4fun.model.Notification;
 import org.codemonkey4fun.model.SendResult;
 import org.codemonkey4fun.service.ApnsServiceImpl;
 import org.codemonkey4fun.service.internal.ApnsService;
-import org.codemonkey4fun.model.Notification;
 import org.codemonkey4fun.service.internal.PushCallBack;
 
 import java.net.InetSocketAddress;
 
 /**
  * high level push client
+ *
  * @Author Jonathan
  * @Date 2020/1/2
  **/
@@ -35,6 +36,7 @@ public class ApnsClient {
 
     /**
      * synchronized push method
+     *
      * @param notification
      * @return
      */
@@ -44,6 +46,7 @@ public class ApnsClient {
 
     /**
      * asynchronized push method
+     *
      * @param notification
      * @param callBack
      */

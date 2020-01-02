@@ -36,7 +36,7 @@ public class ApnsTokenInterceptor implements Interceptor {
                             authenticationInstance.getToken(), refreshAt.getTime() / 1000);
                     return token;
                 }
-    });
+            });
 
 
     @NotNull
@@ -62,6 +62,7 @@ public class ApnsTokenInterceptor implements Interceptor {
 
         return request;
     }
+
     private Notification body(final Request request) {
         Notification notification = null;
         try {

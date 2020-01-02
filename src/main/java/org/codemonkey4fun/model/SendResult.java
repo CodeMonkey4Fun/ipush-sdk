@@ -6,6 +6,7 @@ import lombok.Data;
 
 /**
  * Data model of push result
+ *
  * @Author Jonathan
  * @Date 2020/1/2
  **/

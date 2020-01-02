@@ -40,10 +40,12 @@ public class ApnsClientBuilder {
         this.apnsServer = apnsServer;
         return this;
     }
+
     public ApnsClientBuilder setIdlePingInterval(long idlePingInterval) {
         this.idlePingInterval = idlePingInterval;
         return this;
     }
+
     public ApnsClientBuilder setReadTimeoutMillis(long readTimeout) {
         this.readTimeout = readTimeout;
         return this;
@@ -80,9 +82,8 @@ public class ApnsClientBuilder {
     }
 
     public ApnsClient build() {
-        return new ApnsClient( this);
+        return new ApnsClient(this);
     }
-
 
 
 }

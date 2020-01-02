@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
 import org.codemonkey4fun.interceptor.ApnsTokenInterceptor;
-import org.codemonkey4fun.model.SendResult;
 import org.codemonkey4fun.model.Notification;
+import org.codemonkey4fun.model.SendResult;
 import org.codemonkey4fun.service.internal.PushCallBack;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * a implementation of APNs through HTTP2 protocol
+ *
  * @Author Jonathan
  * @Date 2020/1/2
  **/
@@ -26,38 +27,40 @@ public class ApnsServiceImpl extends AbstractApnsService {
 
     /**
      * initial connection information
+     *
      * @param address
-     * @param idlePingInterval  heartbeat time limitation, seconds format
-     * @param connectTimeout    connection time limitation, seconds format
-     * @param readTimeout       read data time limitation, seconds format
-     * @param writeTimeout      write data time limitation, seconds format
-     * @param keepAliveDuration http2 keepalive, used for connection threads pool
-     * @param maxIdleConnections    maximum idle threads limitation
-     * @param maxRequests       maximum requests limitation
+     * @param idlePingInterval   heartbeat time limitation, seconds format
+     * @param connectTimeout     connection time limitation, seconds format
+     * @param readTimeout        read data time limitation, seconds format
+     * @param writeTimeout       write data time limitation, seconds format
+     * @param keepAliveDuration  http2 keepalive, used for connection threads pool
+     * @param maxIdleConnections maximum idle threads limitation
+     * @param maxRequests        maximum requests limitation
      * @param maxRequestsPerHost maximum requests limitation per each host
      */
     public ApnsServiceImpl(InetSocketAddress address, long idlePingInterval, long connectTimeout, long readTimeout,
-                                long writeTimeout, long keepAliveDuration, int maxIdleConnections, int maxRequests,int maxRequestsPerHost) {
+                           long writeTimeout, long keepAliveDuration, int maxIdleConnections, int maxRequests, int maxRequestsPerHost) {
 
         Dispatcher dispatcher = new Dispatcher();
         dispatcher.setMaxRequests(maxRequests);
         dispatcher.setMaxRequestsPerHost(maxRequestsPerHost);
 
         httpClient = new OkHttpClient.Builder().connectTimeout(connectTimeout, TimeUnit.SECONDS)
-                            .readTimeout(readTimeout, TimeUnit.SECONDS)
-                            .writeTimeout(writeTimeout, TimeUnit.SECONDS)
-                            .connectionPool(new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.SECONDS))
-                            .pingInterval(idlePingInterval, TimeUnit.SECONDS)
-                            .retryOnConnectionFailure(true)
-                            .dispatcher(dispatcher)
-                            .addInterceptor(new ApnsTokenInterceptor())
-                            .build();
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .connectionPool(new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.SECONDS))
+                .pingInterval(idlePingInterval, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .dispatcher(dispatcher)
+                .addInterceptor(new ApnsTokenInterceptor())
+                .build();
         // TODO interceptor calling
         this.address = address;
     }
 
     /**
      * send notification sequential way
+     *
      * @param notification
      * @return
      */
@@ -72,7 +75,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
             Response response = call.execute();
             ResponseBody body = response.body();
             int code = response.code();
-            String content = body != null? body.string() : null;
+            String content = body != null ? body.string() : null;
             Headers headers = response.headers();
             composeSendResult(result, code, content, headers);
         } catch (IOException e) {
@@ -86,6 +89,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
 
     /**
      * send notification parallel way
+     *
      * @param notification
      * @param callBack
      */
@@ -122,6 +126,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
      * Compose a Request object, refer <a>https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html</a>
      * schema: https://<host/>/v3/device/<token/>
      * custom headers related to apns settings.
+     *
      * @param notificationService
      * @return
      */
@@ -147,6 +152,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
 
     /**
      * Compose SendResult object by given parameters
+     *
      * @param code
      * @param data
      * @param headers
