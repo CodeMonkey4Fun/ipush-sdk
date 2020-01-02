@@ -3,6 +3,7 @@ package org.codemonkey4fun.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
+import org.codemonkey4fun.interceptor.ApnsTokenInterceptor;
 import org.codemonkey4fun.model.SendResult;
 import org.codemonkey4fun.model.Notification;
 import org.codemonkey4fun.service.internal.PushCallBack;
@@ -49,7 +50,7 @@ public class ApnsServiceImpl extends AbstractApnsService {
                             .pingInterval(idlePingInterval, TimeUnit.SECONDS)
                             .retryOnConnectionFailure(true)
                             .dispatcher(dispatcher)
-                            .addInterceptor(null)
+                            .addInterceptor(new ApnsTokenInterceptor())
                             .build();
         // TODO interceptor calling
         this.address = address;

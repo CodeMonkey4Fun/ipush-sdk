@@ -7,6 +7,8 @@ public interface Notification {
 
     Long getMsgId();
 
+    AuthenticationInstance getProvider();
+
     String getDeviceToken();
 
     String getPayload();
