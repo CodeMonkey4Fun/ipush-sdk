@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.codemonkey4fun.model.ApnsServer;
 
 /**
+ * APNs configuration builder
  * @Author Jonathan
  * @Date 2020/1/2
  **/
